@@ -1,0 +1,7 @@
+[
+    {"id": 1, "text": "Сходить в магазин", "completed": false},
+    {"id": 2, "text": "Починить лампочку", "completed": false},
+    {"id": 3, "text": "Убрать зимнюю одежду", "completed": false},
+    {"id": 3, "text": "Поклеить обои", "completed": false},
+    {"id": 3, "text": "Купить билет на поезд", "completed": false}
+  ]
