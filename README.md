@@ -1,18 +1,17 @@
 # my-vue3-app
 
-This template should help get you started developing with Vue 3 in Vite.
+## Цель
 
-## Recommended IDE Setup
+Создать небольшое SPA-приложение на Vue, которое:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+* Загружает список задач из JSON-файла
+* Позволяет отмечать задачи как выполненные (чекбоксы)
 
-## Type Support for `.vue` Imports in TS
+## Требования
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+* При первом запуске данные подгружаются из файла tasks.json
+* При перезагрузке страницы состояние списка задач сохраняется
+* Завернуть полученное приложение в Docker
 
 ## Project Setup
 
