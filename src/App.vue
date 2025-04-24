@@ -68,7 +68,7 @@ onMounted(() => {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: Verdana, sans-serif;
 }
 
 .add-task {
@@ -86,6 +86,21 @@ onMounted(() => {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 20px;
+}
+
+.task-list li {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  border: 1px solid lightgrey;
+
+}
+
+.task-list li input {
+  margin-right: 20px;
+  margin-left: 8px;
 }
 
 .task-list label {
