@@ -1,23 +1,30 @@
 :root,
 :root.light {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  /* Светлая тема - серые тона */
+  --color-background: #eae7e7;
+  --color-background-soft: #e0e0e0;
+  --color-background-mute: #bdbdbd;
+  
+  --color-text: #424242;
+  --color-heading: #353131;
+  
+  --color-border: #9e9e9e;
+  --color-border-hover: #757575;
 }
 
 :root.dark {
+  /* Темная тема - темные серые тона */
+  --color-background: #212121;
+  --color-background-soft: #424242;
+  --color-background-mute: #616161;
+  
+  --color-text: #e0e0e0;
+  --color-heading: #dfd8d8;
+  
+  --color-border: #757575;
+  --color-border-hover: #9e9e9e;
+  
   color-scheme: dark;
-  --color-background: var(--vt-c-black);
-  --color-background-soft: var(--vt-c-black-soft);
-  --color-background-mute: var(--vt-c-black-mute);
-  --color-border: var(--vt-c-divider-dark-2);
-  --color-border-hover: var(--vt-c-divider-dark-1);
-  --color-heading: var(--vt-c-text-dark-1);
-  --color-text: var(--vt-c-text-dark-2);
 }
 
 *,
