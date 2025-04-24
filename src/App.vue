@@ -1,44 +1,61 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import type { Task } from './types/common.ts'
 
-interface Task {
-  id: number
-  text: string
-  completed: boolean
-}
-
-const loading = ref(true)
 const tasks = ref<Task[]>([])
 const error = ref<string | null>(null)
 
-async function loadTasks() {
+// Загрузка начальных задач
+const loadInitialTasks = async (): Promise<void> => {
   try {
-    const response = await fetch('../src/tasks/tasks.json')
-    if (!response.ok) {
-      throw new Error('Не удалось загрузить задачи')
-    }
+    const response = await fetch('/tasks.json')
+    if (!response.ok) throw new Error('Не удалось загрузить задачи')
     tasks.value = await response.json()
   } catch (err) {
     error.value = err instanceof Error ? err.message : 'Неизвестная ошибка'
     console.error('Ошибка загрузки задач:', err)
-  } finally {
-    loading.value = false
   }
 }
 
+// Переключение статуса задачи
+const toggleTaskStatus = (task: Task): void => {
+  task.completed = !task.completed
+  saveTasks()
+}
+
+// Сохранение задач в localStorage
+const saveTasks = (): void => {
+  localStorage.setItem('tasks', JSON.stringify(tasks.value))
+}
+
+// Загрузка при монтировании компонента
 onMounted(() => {
-  console.log('Jared Leto')
-  loadTasks()
+  const savedTasks = localStorage.getItem('tasks')
+  if (savedTasks) {
+    tasks.value = JSON.parse(savedTasks)
+  } else {
+    loadInitialTasks()
+  }
 })
 </script>
+
 <template>
   <div class="container">
     <h1>Todo List</h1>
-    <div v-if="loading">Загрузка задач...</div>
-    <ul v-else class="task-list">
-      <li v-for="(task, key) in tasks" :key="task.id">
-        <input type="checkbox" :id="'task' + task.id" v-model="task.completed" />
-        <label :for="'task' + task.id" :class="{ completed: task.completed }">
+
+    <ul class="task-list">
+      <li v-for="task in tasks" :key="task.id">
+        <input
+          type="checkbox"
+          :id="'task' + task.id"
+          v-model="task.completed"
+          @change="saveTasks"
+        />
+        <label
+          :for="'task' + task.id"
+          :class="{ completed: task.completed }"
+          @click="toggleTaskStatus(task)"
+        >
           {{ task.text }}
         </label>
       </li>
@@ -51,7 +68,7 @@ onMounted(() => {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: Verdana, sans-serif;
 }
 
 .add-task {
@@ -69,5 +86,30 @@ onMounted(() => {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 20px;
+}
+
+.task-list li {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  border: 1px solid lightgrey;
+
+}
+
+.task-list li input {
+  margin-right: 20px;
+  margin-left: 8px;
+}
+
+.task-list label {
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #888;
+  opacity: 0.6;
 }
 </style>

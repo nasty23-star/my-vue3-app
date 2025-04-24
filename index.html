@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="ru">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
+    <script>
+      // Блокировка рендеринга до определения темы
+      document.documentElement.style.visibility = 'hidden';
+      const savedTheme = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (systemDark ? 'dark' : 'light');
+      document.documentElement.classList.add(theme);
+      document.documentElement.style.visibility = '';
+    </script>
+    <link rel="stylesheet" href="/src/style.css">
   </head>
   <body>
     <div id="app"></div>
